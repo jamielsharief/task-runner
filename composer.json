@@ -1,9 +1,7 @@
 {
   "name": "jamielsharief/task-runner",
   "description": "Task runner",
-  "homepage": "https://www.originphp.com",
-  "type": "project",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "require": {
     "php": "^7.4 || ^8.0",
     "jamielsharief/data-transfer-object": "^0.1.1",
