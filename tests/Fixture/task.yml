@@ -1,0 +1,55 @@
+dotenv: .env.test
+environment:
+  FOO: bar
+tasks:
+  path:
+    description: echos the current path
+    commands:
+      - pwd
+    output: false
+  echo:
+    description: echos a var to screen
+    commands:
+      - echo "ECHO='${HOME}'"
+    output: false
+  env:
+    description: checks env vars
+    environment:
+      BAR: foo
+    commands:
+      - echo "FOOBAR='${FOOBAR}'"
+      - echo "FOO='${FOO}'"
+      - echo "BAR='${BAR}'"
+    output: false
+  download:
+    name: download source code
+    description: downloads repo
+    directory: tmp/build
+    commands:
+      - git clone https://github.com/jamielsharief/struct.git .
+  install:
+    description: install
+    directory: tmp/build
+    commands:
+      - composer install
+    depends:
+      - download
+  fail:
+    name: directory exists
+    description: Causes a failure
+    directory: tmp/build2
+    commands:
+      - ls /foo/bar/somewhere
+  install-failure:
+    name: install
+    description: installs the software
+    directory: tmp/build
+    commands:
+      - composer install
+    depends:
+      - fail
+      - echo
+  env-does-not-exist:
+    dotenv: /nowhere
+    commands:
+      - echo foo

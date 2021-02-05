@@ -1,0 +1,34 @@
+{
+  "name": "jamielsharief/task-runner",
+  "description": "Task runner",
+  "homepage": "https://www.originphp.com",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "jamielsharief/data-transfer-object": "^0.1.1",
+    "originphp/console": "^3.17.7",
+    "originphp/yaml": "^2.1",
+    "originphp/process": "^3.17",
+    "originphp/dotenv": "^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.2",
+    "phpstan/phpstan": "^0.12.64",
+    "originphp/test-suite": "^3.11",
+    "originphp/filesystem": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "TaskRunner\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TaskRunner\\Test\\": "tests/"
+    }
+  },
+  "bin": [
+    "bin/task"
+  ]
+}
