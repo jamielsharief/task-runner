@@ -35,10 +35,16 @@ class TaskCommandTest extends OriginTestCase
         }
     }
 
+    public static function tearDownAfterClass(): void
+    {
+        if (Folder::exists(ROOT . '/tmp')) {
+            Folder::delete(ROOT . '/tmp', ['recursive' => true]);
+        }
+    }
+
     public function testWorkingDirectory()
     {
         $this->exec('task path -v -d ' . ROOT . '/tmp/test');
-
         $this->assertExitSuccess();
 
         $this->assertOutputContains('<white>[</white> <green>OK</green> <white>] path</white>');
