@@ -23,6 +23,10 @@ chdir($buildRoot);
 
 shell_exec('composer update -q --no-dev');
 
+// Modify the version
+$version = shell_exec('git describe --tags --exact-match HEAD 2>&1');
+$version = preg_match('/^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-z-])+)?$/i', $version) ? $version : 'unkown';
+
 $phar = new Phar($output, 0, 'task.phar');
 $phar->setSignatureAlgorithm(Phar::SHA1);
 
@@ -35,13 +39,7 @@ $phar->addFromString(
     preg_replace('/^#!\/usr\/bin\/env php\R/', '', file_get_contents($buildRoot . '/bin/task'))
 );
 
-// Modify the version
-$version = shell_exec('git describe --tags --exact-match HEAD 2>&1');
-$version = preg_match('/^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-z-])+)?$/i', $version) ? $version : 'unkown';
-$phar->addFromString(
-    'src/Command/TaskCommand.php',
-    preg_replace('/{{task_version}}/', $version, file_get_contents($buildRoot . '/src/Command/TaskCommand.php'))
-);
+$phar->addFromString('version.txt', $version);
 
 $phar->setStub("#!/usr/bin/env php\n". $phar->createDefaultStub('bin/task'));
 $phar->stopBuffering();

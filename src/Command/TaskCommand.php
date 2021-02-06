@@ -24,8 +24,6 @@ use TaskRunner\DataTransferObject\Pipeline;
 
 class TaskCommand extends Command
 {
-    const VERSION = '{{task_version}}';
-
     protected $name = 'task';
     protected $description = 'Task runner';
 
@@ -259,7 +257,7 @@ class TaskCommand extends Command
      */
     private function taskVersion(): string
     {
-        return self::VERSION === '{{task_version}}' ? 'dev' : self::VERSION;
+        return file_get_contents(ROOT . '/version.txt');
     }
 
     /**
