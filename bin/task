@@ -18,9 +18,9 @@ use TaskRunner\Command\TaskCommand;
 use Origin\Console\ConsoleApplication;
 
 $app = new ConsoleApplication();
-$app->name('database');
+$app->name('task-runner');
 $app->description([
- 'DB application for backing up and restoring the database'
+ 'Task runner'
 ]);
-$app->addCommand('backup', TaskCommand::class);
+$app->addCommand('task', TaskCommand::class);
 exit($app->run());
