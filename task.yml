@@ -24,6 +24,7 @@ tasks:
     description: Creates a release and updates version.txt
     commands:
       - bin/release
+    output: true
   build:
     name: Build PHAR archive
     description: Builds the PHAR
