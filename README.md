@@ -1,5 +1,9 @@
 # Task Runner
 
+![license](https://img.shields.io/badge/license-Apache%202-blue)
+[![build](https://github.com/jamielsharief/task-runner/workflows/CI/badge.svg)](https://github.com/jamielsharief/task-runner/actions)
+[![coverage status](https://coveralls.io/repos/github/jamielsharief/task-runner/badge.svg?branch=master)](https://coveralls.io/github/jamielsharief/task-runner?branch=master)
+
 Between working on various projects, sometimes months between checking them and I wanted a way to standardize
 the processes for each project, which made it easy to setup, manage and use. 
 
