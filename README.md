@@ -9,8 +9,20 @@ the processes for each project, which made it easy to setup, manage and use.
 
 ## Installation
 
+
+To include in your project
+
 ```bash
 $ composer require jamielsharief/task-runner
+```
+
+To build the PHAR as `bin/task.phar`, you can run the `deploy` task instead and this will copy the phar to `/usr/local/bin` folder
+
+```bash
+$ git clone https://github.com/jamielsharief/task-runner task-runner
+$ cd task-runner
+$ composer install
+$ bin/task build
 ```
 
 ## Usage
