@@ -16,7 +16,7 @@ To include in your project
 $ composer require jamielsharief/task-runner
 ```
 
-To build the PHAR as `bin/task.phar`, you can run the `deploy` task instead and this will copy the phar to `/usr/local/bin` folder
+To build the PHAR as `bin/task.phar`, run the following, if you prefer to install to your `/usr/local/bin` run `bin/task deploy` instead.
 
 ```bash
 $ git clone https://github.com/jamielsharief/task-runner task-runner
