@@ -16,6 +16,7 @@ tasks:
       XDEBUG_MODE: "coverage"
   phpstan:
     name: Run PHPStan
+    description: Runs PHPStan to find errors in code
     commands:
       - vendor/bin/phpstan analyse src
   release:
