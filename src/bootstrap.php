@@ -15,11 +15,14 @@ declare(strict_types = 1);
 define('ROOT', dirname(__DIR__));
 define('APP', ROOT . '/src');
 
-// Work with composer copy to bin
-if (file_exists(getcwd() . '/vendor/autoload.php')) {
-    require getcwd() . '/vendor/autoload.php';
-} elseif (file_exists(ROOT . '/vendor/autoload.php')) {
+/**
+ * Work with copy to bin and in phar files. Only use working directory
+ * if local copy not exists since this will cause problems with PHAR
+ */
+if (file_exists(ROOT . '/vendor/autoload.php')) {
     require ROOT . '/vendor/autoload.php';
+} elseif (file_exists(getcwd() . '/vendor/autoload.php')) {
+    require getcwd() . '/vendor/autoload.php';
 }
 
 use Origin\Core\Config;
