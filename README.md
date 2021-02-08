@@ -99,25 +99,33 @@ tasks:
       - vendor/bin/phpunit --coverage-html coverage
     environment:
       XDEBUG_MODE: "coverage"
+  phpstan:
+    name: Run PHPStan
+    description: Runs PHPStan to find errors in code
+    commands:
+      - vendor/bin/phpstan analyse src
   release:
     name: Create release
     description: Creates a release and updates version.txt
     commands:
       - bin/release
+    output: true
   build:
     name: Build PHAR archive
     description: Builds the PHAR
     commands:
       - php -d phar.readonly=Off bin/build
+      - composer update
     depends:
       - test
+      - phpstan
   deploy:
-    name: Copy task.phar to local/bin
+    name: Copy app.phar to local/bin
     description: Deploys the PHAR file
     depends:
       - build
     commands:
-      - cp bin/task.phar /usr/local/bin/task
+      - cp bin/app.phar /usr/local/bin/app
 ```
 
 ### Keys
