@@ -10,7 +10,8 @@
  * @copyright   Copyright (c) Jamiel Sharief
  * @license     https://opensource.org/licenses/Apache-2.0 Apache License 2.0
  */
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace TaskRunner\Command;
 
 use Exception;
@@ -47,12 +48,12 @@ class TaskCommand extends Command
         ]);
     }
 
-    protected function startup():void
+    protected function startup(): void
     {
         $this->io->out('<yellow>' . $this->banner() . '</yellow>');
         $this->io->out('version <yellow>'  . $this->taskVersion() . '</yellow>');
     }
- 
+
     /**
      * @return void
      */
@@ -76,7 +77,7 @@ class TaskCommand extends Command
      * @param string $name
      * @return \TaskRunner\DataTransferObject\Task
      */
-    private function prepareTask(string $name) : Task
+    private function prepareTask(string $name): Task
     {
         if (! isset($this->pipeline->tasks[$name])) {
             $this->throwError('Unkown task: ' . $name);
@@ -94,7 +95,7 @@ class TaskCommand extends Command
      * @param string $name
      * @return bool
      */
-    private function runTask(Task $task) : bool
+    private function runTask(Task $task): bool
     {
         if ($task->directory && ! is_dir($task->directory)) {
             mkdir($task->directory, 0775, true);
@@ -111,7 +112,7 @@ class TaskCommand extends Command
                 $this->io->status('skipped', $childTask->name);
             }
         }
-       
+
         if ($hasErrors) {
             $this->io->status('skipped', $task->name);
 
@@ -127,17 +128,17 @@ class TaskCommand extends Command
                 'output' => $task->output,
                 'env' => $this->prepareEnvironment($task)
             ]);
-            
+
             $result = $process->execute();
 
             if (! $task->output) {
-                $output = trim($process->output());
-                $error = trim($process->error());
-    
+                $output = trim($process->getOutput());
+                $error = trim($process->getErrorOutput());
+
                 $this->debug($output);
                 $this->debug($error);
             }
-   
+
             if (! $result) {
                 $this->io->status('error', $task->name);
 
@@ -156,7 +157,7 @@ class TaskCommand extends Command
      * @param \TaskRunner\DataTransferObject\Task $task
      * @return array
      */
-    private function prepareEnvironment(Task $task) : array
+    private function prepareEnvironment(Task $task): array
     {
         $env = [];
 
@@ -184,7 +185,7 @@ class TaskCommand extends Command
      * @param string $path
      * @return array
      */
-    private function loadDotEnv(string $path) : array
+    private function loadDotEnv(string $path): array
     {
         if ($path[0] !== '/') {
             $path = $this->workingDirectory() . '/' . $path;
@@ -202,11 +203,11 @@ class TaskCommand extends Command
     /**
      * @return void
      */
-    private function showList() : void
+    private function showList(): void
     {
         $out = [];
         $pipeline = $this->loadConfig();
-   
+
         $out[] = ['task','description'];
         foreach ($pipeline->tasks as $name => $task) {
             $out[] = [$name,$task->description];
@@ -217,7 +218,7 @@ class TaskCommand extends Command
     /**
      * @return \TaskRunner\DataTransferObject\Pipeline
      */
-    protected function loadConfig() : Pipeline
+    protected function loadConfig(): Pipeline
     {
         $config = $this->options('config');
 
@@ -241,7 +242,7 @@ class TaskCommand extends Command
         return $pipeline;
     }
 
-    private function workingDirectory() : string
+    private function workingDirectory(): string
     {
         $workingDirectory = $this->options('working-directory') ;
 
